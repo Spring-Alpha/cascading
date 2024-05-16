@@ -19,8 +19,8 @@ public class Product {
     @Id
     private Integer id;
     private String name;
-    @ManyToMany(mappedBy = "products")
-    private Set<Customer> customers;
+    //@ManyToMany(mappedBy = "products")
+    //private Set<Customer> customers;
 
     public Product(Integer id, String name) {
         this.id = id;

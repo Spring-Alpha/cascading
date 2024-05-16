@@ -7,6 +7,7 @@ import com.example.cascading.model.Question;
 import com.example.cascading.repository.CustomerRepository;
 import com.example.cascading.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@Slf4j
 public class CascadingApplication implements CommandLineRunner {
 
 	private final QuestionRepository questionRepository;
@@ -59,11 +61,18 @@ public class CascadingApplication implements CommandLineRunner {
 		Product product2 = new Product(2, "Iphone2");
 		Product product3 = new Product(3, "Iphone3");
 		Product product4 = new Product(4, "Iphone4");
+		Product product5 = new Product(5, "Iphone55");
+		Product product6 = new Product(6, "Iphone56");
+		Product product7 = new Product(7, "Iphone57");
 
 		customer1.setProducts(Set.of(product1, product3, product4));
-		customer2.setProducts(Set.of(product2, product3));
+		customer2.setProducts(Set.of(product2, product3, product5, product6, product7));
 
-		customerRepository.saveAll(Set.of(customer1, customer2));
-		customerRepository.deleteById(1);
+		try {
+			customerRepository.saveAll(Set.of(customer1, customer2));
+		} catch (Exception e){
+			log.info("{} cause of the error, persistence is not possible", e.getMessage());
+		}
+		customerRepository.deleteById(2);
 	}
 }

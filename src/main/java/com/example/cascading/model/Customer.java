@@ -16,7 +16,7 @@ public class Customer {
     @Id
     private Integer id;
     private String name;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany
     @JoinTable(
             name = "customer_product",
             joinColumns = @JoinColumn(name = "customer_id"),
