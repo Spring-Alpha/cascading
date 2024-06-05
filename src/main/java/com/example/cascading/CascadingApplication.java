@@ -1,10 +1,8 @@
 package com.example.cascading;
 
-import com.example.cascading.model.Answer;
-import com.example.cascading.model.Customer;
-import com.example.cascading.model.Product;
-import com.example.cascading.model.Question;
+import com.example.cascading.model.*;
 import com.example.cascading.repository.CustomerRepository;
+import com.example.cascading.repository.PeopleRepository;
 import com.example.cascading.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +20,7 @@ public class CascadingApplication implements CommandLineRunner {
 
 	private final QuestionRepository questionRepository;
 	private final CustomerRepository customerRepository;
+	private final PeopleRepository peopleRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CascadingApplication.class, args);
@@ -31,7 +30,8 @@ public class CascadingApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//One to many / Many to one cascade testing
 		//oneSideCascade();
-		twoSideCascade();
+		//twoSideCascade();
+		elementCollection();
 	}
 
 	private void oneSideCascade() {
@@ -74,5 +74,20 @@ public class CascadingApplication implements CommandLineRunner {
 			log.info("{} cause of the error, persistence is not possible", e.getMessage());
 		}
 		customerRepository.deleteById(2);
+	}
+
+	private void elementCollection() {
+		People people = new People();
+		people.setId(1);
+		people.setName("Peo");
+		people.setPhoneNumbers(Set.of("01767310339", "01886310339"));
+
+		People people2 = new People();
+		people2.setId(2);
+		people2.setName("Peo2");
+		people2.setPhoneNumbers(Set.of("01767310339", "01886310339"));
+
+		peopleRepository.save(people);
+		//peopleRepository.deleteById(1);
 	}
 }
