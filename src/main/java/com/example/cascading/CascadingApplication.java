@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,11 +31,12 @@ public class CascadingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//One to many / Many to one cascade testing
-		//oneSideCascade();
+		oneSideCascade();
 		//twoSideCascade();
-		elementCollection();
+		//elementCollection();
 	}
 
+	//@Transactional
 	private void oneSideCascade() {
 		Question question = new Question();
 		question.setId(1);
@@ -47,10 +50,11 @@ public class CascadingApplication implements CommandLineRunner {
 //		Answer answer2 = new Answer(2, "It is a hibernate concept1");
 //		Answer answer3 = new Answer(3, "It is a hibernate concept2");
 
-		question.setAnswers(List.of(answer1, answer2, answer3));
+		//question.setAnswers(List.of(answer1, answer2, answer3));
+		question.setAnswers(new ArrayList<>());
 
 		questionRepository.save(question);
-		questionRepository.deleteById(1);
+		//questionRepository.deleteById(1);
 	}
 
 	private void twoSideCascade() {

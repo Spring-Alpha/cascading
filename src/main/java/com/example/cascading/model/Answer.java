@@ -16,7 +16,7 @@ public class Answer {
     @Id
     private Integer id;
     private String answer;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Question question;
 
     public Answer(Integer id, String answer) {
