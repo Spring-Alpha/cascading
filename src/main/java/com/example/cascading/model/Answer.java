@@ -16,7 +16,10 @@ public class Answer {
     @Id
     private Integer id;
     private String answer;
+
+    //@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @ManyToOne
+    @JoinColumn(insertable = false, updatable = false)
     private Question question;
 
     public Answer(Integer id, String answer) {

@@ -16,7 +16,9 @@ public class Question {
     @Id
     private Integer id;
     private String question;
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
-    //@JoinColumn(name = "question_id")
+    //@OneToMany(mappedBy = "question", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    //@OneToMany(mappedBy = "question", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "question_id")
     private List<Answer> answers;
 }

@@ -1,6 +1,7 @@
 package com.example.cascading;
 
 import com.example.cascading.model.*;
+import com.example.cascading.repository.AnswerRepository;
 import com.example.cascading.repository.CustomerRepository;
 import com.example.cascading.repository.PeopleRepository;
 import com.example.cascading.repository.QuestionRepository;
@@ -21,6 +22,7 @@ import java.util.Set;
 public class CascadingApplication implements CommandLineRunner {
 
 	private final QuestionRepository questionRepository;
+	private final AnswerRepository answerRepository;
 	private final CustomerRepository customerRepository;
 	private final PeopleRepository peopleRepository;
 
@@ -42,19 +44,20 @@ public class CascadingApplication implements CommandLineRunner {
 		question.setId(1);
 		question.setQuestion("What is cascading...?");
 
-		Answer answer1 = new Answer(1, "It is a hibernate concept", question);
-		Answer answer2 = new Answer(2, "It is a hibernate concept1", question);
-		Answer answer3 = new Answer(3, "It is a hibernate concept2", question);
+//		Answer answer1 = new Answer(1, "It is a hibernate concept", question);
+//		Answer answer2 = new Answer(2, "It is a hibernate concept1", question);
+//		Answer answer3 = new Answer(3, "It is a hibernate concept2", question);
 
-//		Answer answer1 = new Answer(1, "It is a hibernate concept");
-//		Answer answer2 = new Answer(2, "It is a hibernate concept1");
-//		Answer answer3 = new Answer(3, "It is a hibernate concept2");
+		Answer answer1 = new Answer(1, "It is a hibernate concept");
+		Answer answer2 = new Answer(2, "It is a hibernate concept1");
+		Answer answer3 = new Answer(3, "It is a hibernate concept2");
 
-		//question.setAnswers(List.of(answer1, answer2, answer3));
-		question.setAnswers(new ArrayList<>());
+		question.setAnswers(List.of(answer1, answer2, answer3));
+		//question.setAnswers(new ArrayList<>());
 
-		questionRepository.save(question);
+		//questionRepository.save(question);
 		//questionRepository.deleteById(1);
+		answerRepository.deleteById(1);
 	}
 
 	private void twoSideCascade() {
